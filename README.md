@@ -1,2 +1,4 @@
 # continuous-study
-Repo para estudos que realizo
+
+Este repo é para ser usado no estudo contínuo dos assuntos que me interessam
+
