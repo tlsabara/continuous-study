@@ -1,1 +1,4 @@
 /Standard/.ipynb_checkpoints/
+.idea/
+.jupyter/
+**.Identifier
