@@ -20,5 +20,3 @@ def my_function(a: int, b: int, c: str, d: bool) -> int:
         return a + b
     else:
         return b
-
-
