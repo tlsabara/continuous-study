@@ -16,7 +16,7 @@ class InterfaceRoute(ABC, Resource):
     @abstractmethod
     def _method_post(self, post_data):
         return jsonify(
-            {'message':'POST not allowed'}
+            {'message': 'POST not allowed'}
         )
 
     @abstractmethod
