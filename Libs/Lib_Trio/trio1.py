@@ -1,41 +1,27 @@
-# import httpx
-# import trio
-#
-#
-# async def foo(id_poke: str):
-#     url = 'https://pokeapi.co/api/v2/pokemon/{id_pokemon}'
-#
-#     resp = httpx.get(url.format(id_poke)).json()
-#
-
-
+from random import randint
+import httpx
 import trio
 
 
-async def child1():
-    print("  child1: started! sleeping now...")
-    await trio.sleep(1)
-    print("  child1: exiting!")
+async def foo(id_poke: str):
+    url = 'https://pokeapi.co/api/v2/pokemon/{id_pokemon}'
+
+    async with httpx.AsyncClient() as client:
+        await trio.sleep(randint(0, 10))
+        response = await client.get(
+            url.format(id_pokemon=id_poke)
+        )
+        data = response.json()
+        print('ID: ', id_poke, 'Pokemon: ', data.get('name'))
 
 
-async def child2():
-    print("  child2: started! sleeping now...")
-    await trio.sleep(1)
-    print("  child2: exiting!")
-
-
-async def parent():
-    print("parent: started!")
+async def bar():
+    print('Iniciou BAR')
     async with trio.open_nursery() as nursery:
-        print("parent: spawning child1...")
-        nursery.start_soon(child1)
-
-        print("parent: spawning child2...")
-        nursery.start_soon(child2)
-
-        print("parent: waiting for children to finish...")
-        # -- we exit the nursery block here --
-    print("parent: all done!")
+        for n in range(1, 15):
+            nursery.start_soon(foo, n)
+    print('Finalizou BAR')
 
 
-trio.run(parent)
+trio.run(bar)
+
