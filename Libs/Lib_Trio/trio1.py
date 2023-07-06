@@ -15,13 +15,22 @@ async def foo(id_poke: str):
         print('ID: ', id_poke, 'Pokemon: ', data.get('name'))
 
 
-async def bar():
+async def response_good_foo(msg):
+    await trio.sleep(randint(0, 3))
+    print('Chamada de retorno ao cliente ', msg)
+
+
+async def bar():  # Vulgo MAIN
     print('Iniciou BAR')
     async with trio.open_nursery() as nursery:
+        nursery.start_soon(response_good_foo, 'JOSE')
         for n in range(1, 15):
             nursery.start_soon(foo, n)
     print('Finalizou BAR')
 
+if __name__ == "__main__":
+    print('Inicio do main')
+    trio.run(bar)
+    print('Fim do main')
 
-trio.run(bar)
 
