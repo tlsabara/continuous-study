@@ -14,7 +14,7 @@ class IntegerVector:
             raise ValueError("Math operations on can be done between Vectors")
 
     def __repr__(self) -> str:
-        return f"IntegerVector<x={self.x}, y={self.y}>"
+        return f"IntegerVector(x={self.x}, y={self.y})"
 
     def __add__(self, other: IntegerVector) -> IntegerVector:
         self.__check_other(other)
