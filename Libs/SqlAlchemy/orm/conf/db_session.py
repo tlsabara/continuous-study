@@ -32,31 +32,26 @@ def create_engine() -> Engine:
 
     db_url = os.environ.get("DATABASE_URL")
     check_thread = os.environ.get("CHECK_THREAD", "").upper() == "true"
-    _args = {
-        "check_same_thread": check_thread
-    }
+    _args = {"check_same_thread": check_thread}
     __engine = sa.create_engine(url=db_url, echo=False, connect_args=_args)
 
 
 def create_session() -> Session:
-    """Cria uma nova sessão de conexão com o banco de dados
-    """
+    """Cria uma nova sessão de conexão com o banco de dados"""
     global __engine
 
     if not __engine:
         create_engine()
 
     __session = sessionmaker(
-        __engine,
-        expire_on_commit=False,  # Estudar este parametro.
-        class_=Session
+        __engine, expire_on_commit=False, class_=Session  # Estudar este parametro.
     )
 
     return __session()
 
+
 def create_tables(drop_all: bool = False) -> None:
-    """Realiza a criação das tabelas no banco de dados.
-    """
+    """Realiza a criação das tabelas no banco de dados."""
     global __engine
 
     if not __engine:
