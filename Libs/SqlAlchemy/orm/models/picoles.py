@@ -1,6 +1,7 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as saorm
 from datetime import datetime
+
 from models.utils import ModelBase
 from models.sabores import Sabores
 from models.tipos_embalagem import TiposEmbalagem
@@ -15,7 +16,8 @@ class Picoles(ModelBase):
     tipos_embalagem: TiposEmbalagem = saorm.relationship("TiposEmbalagem", lazy="joined")
 
     id_: int = sa.Column(sa.BigInteger, index=True, autoincrement=True, primary_key=True)
-    preco: float = saorm.relationship("TiposEmbalagem", lazy="joined")
+    preco: float = sa.Column(sa.DECIMAL(8, 2), unique=False)
+    data_criacao: datetime = sa.Column(sa.DateTime, default=datetime.now, nullable=False)
     id_sabores: int = sa.Column(sa.BigInteger, sa.ForeignKey('sabores.id_'), nullable=False)
     id_tipos_embalagem: int = sa.Column(sa.BigInteger, sa.ForeignKey('tipos_embalagem.id_'), nullable=False)
     id_tipos_picole: int = sa.Column(sa.BigInteger, sa.ForeignKey('picoles.id_'), nullable=False)
