@@ -3,6 +3,8 @@ import sqlalchemy.orm as orm
 from datetime import datetime
 from models.utils import ModelBase
 from models.tipos_picole import TiposPicole
+
+
 class Lotes(ModelBase):
     __tablename__ = "lotes"
     tipos_picole: TiposPicole = orm.relationship('TiposPicole', lazy='joined') # Config para o SQLAlchemy
