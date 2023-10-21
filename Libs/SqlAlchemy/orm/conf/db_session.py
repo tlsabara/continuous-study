@@ -12,8 +12,8 @@ import sqlalchemy as sa
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.future.engine import Engine
 
-from models.model_base import ModelBase
-from models import __all_models
+from models.utils import ModelBase
+from models import registry
 
 load_dotenv()
 __engine: Optional[Engine] = None
