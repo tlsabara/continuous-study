@@ -10,7 +10,7 @@ class TiposPicole(ModelBase):
     __tablename__ = "tipos_picole"
 
     id_: int = sa.Column(
-        sa.BigInteger, index=True, primary_key=True, autoincrement=True
+        sa.BigInteger().with_variant(sa.Integer, "sqlite"), index=True, primary_key=True, autoincrement=True
     )
     nome: str = sa.Column(sa.String(45), unique=True, nullable=False)
     data_criacao: datetime = sa.Column(

@@ -7,7 +7,7 @@ class Revendedores(ModelBase):
     __tablename__ = "revendedores"
 
     id_: int = sa.Column(
-        sa.BigInteger, index=True, primary_key=True, autoincrement=True
+        sa.BigInteger().with_variant(sa.Integer, "sqlite"), index=True, primary_key=True, autoincrement=True
     )
     cnpj: str = sa.Column(sa.String(14), unique=True, nullable=False)
     razao_social: str = sa.Column(sa.String(100), unique=False, nullable=False)

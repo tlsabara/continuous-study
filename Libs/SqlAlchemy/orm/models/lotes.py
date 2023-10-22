@@ -15,7 +15,7 @@ class Lotes(ModelBase):
     )  # Config para o SQLAlchemy
 
     id_: int = sa.Column(
-        sa.BigInteger, primary_key=True, autoincrement=True, index=True
+        sa.BigInteger().with_variant(sa.Integer, "sqlite"), primary_key=True, autoincrement=True, index=True
     )
     id_tipo_picole: int = sa.Column(
         sa.BigInteger, sa.ForeignKey("tipos_picole.id_"), nullable=False

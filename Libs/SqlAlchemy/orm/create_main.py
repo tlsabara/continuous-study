@@ -2,4 +2,4 @@ from conf.db_session import create_tables
 
 
 if __name__ == "__main__":
-    create_tables(drop_all= True)
+    create_tables(drop_all=True)

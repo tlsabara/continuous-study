@@ -34,10 +34,10 @@ rel_aditivos_nutritivos_picole = sa.Table(
     ModelBase.metadata,
     sa.Column(
         "id_aditivos_nutritivos",
-        sa.BigInteger,
+        sa.BigInteger().with_variant(sa.Integer, "sqlite"),
         sa.ForeignKey("aditivos_nutritivos.id_"),
     ),
-    sa.Column("id_picoles", sa.BigInteger, sa.ForeignKey("picoles.id_")),
+    sa.Column("id_picoles", sa.BigInteger().with_variant(sa.Integer, "sqlite"), sa.ForeignKey("picoles.id_")),
     sa.Column("data_criacao", sa.DateTime, default=datetime.now, nullable=False),
     sa.Column("active", sa.Boolean, default=True),
 )
@@ -46,8 +46,8 @@ rel_aditivos_nutritivos_picole = sa.Table(
 rel_ingredientes_picole = sa.Table(
     "ingredientes_picole",
     ModelBase.metadata,
-    sa.Column("id_ingredientes", sa.BigInteger, sa.ForeignKey("ingredientes.id_")),
-    sa.Column("id_picoles", sa.BigInteger, sa.ForeignKey("picoles.id_")),
+    sa.Column("id_ingredientes", sa.BigInteger().with_variant(sa.Integer, "sqlite"), sa.ForeignKey("ingredientes.id_")),
+    sa.Column("id_picoles", sa.BigInteger().with_variant(sa.Integer, "sqlite"), sa.ForeignKey("picoles.id_")),
     sa.Column("data_criacao", sa.DateTime, default=datetime.now, nullable=False),
     sa.Column("active", sa.Boolean, default=True),
 )
