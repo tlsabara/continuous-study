@@ -1,5 +1,8 @@
 import sqlalchemy as sa
 from datetime import datetime
+
+from sqlalchemy.orm import Mapped
+
 from models.utils import ModelBase
 
 

@@ -13,7 +13,7 @@ rel_lotes_nota_fiscal = sa.Table(
     "lotes_nota_fiscal",
     ModelBase.metadata,
     sa.Column("id_notas_fiscais", sa.BigInteger, sa.ForeignKey("notas_fiscais.id_")),
-    sa.Column("id_lotes", sa.BigInteger, sa.ForeignKey("lotes.id")),
+    sa.Column("id_lotes", sa.BigInteger, sa.ForeignKey("lotes.id_")),
     sa.Column("data_criacao", sa.DateTime, default=datetime.now, nullable=False),
     sa.Column("active", sa.Boolean, default=True),
 )

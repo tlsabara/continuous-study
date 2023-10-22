@@ -1,17 +1,20 @@
 import sqlalchemy as sa
 import sqlalchemy.orm as saorm
 from datetime import datetime
+
+from sqlalchemy.orm import Mapped
+
 from models.utils import ModelBase
 from models.revendedores import Revendedores
 from models.lotes import Lotes
 
-from relationships_tables import rel_lotes_nota_fiscal
+from models.relationships_tables import rel_lotes_nota_fiscal
 
 
 class NotasFiscais(ModelBase):
     __tablename__ = "notas_fiscais"
-    revendedores: Revendedores = saorm.relationship("Revendedores", lazy="joined")
-    lotes: list[Lotes] = saorm.relationship(
+    revendedores: Mapped[Revendedores] = saorm.relationship("Revendedores", lazy="joined")
+    lotes: Mapped[list[Lotes]] = saorm.relationship(
         "Lotes", secondary=rel_lotes_nota_fiscal, backref="lote", lazy="dynamic"
     )
 

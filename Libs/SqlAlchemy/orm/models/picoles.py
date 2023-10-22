@@ -2,6 +2,8 @@ import sqlalchemy as sa
 import sqlalchemy.orm as saorm
 from datetime import datetime
 
+from sqlalchemy.orm import Mapped
+
 from models.utils import ModelBase
 from models.sabores import Sabores
 from models.tipos_embalagem import TiposEmbalagem
@@ -20,24 +22,24 @@ from models.relationships_tables import (
 class Picoles(ModelBase):
     __tablename__ = "picoles"
 
-    sabores: Sabores = saorm.relationship("Sabores", lazy="joined")
-    tipos_picole: TiposPicole = saorm.relationship("TiposPicole", lazy="joined")
-    tipos_embalagem: TiposEmbalagem = saorm.relationship(
+    sabores: Mapped[Sabores] = saorm.relationship("Sabores", lazy="joined")
+    tipos_picole: Mapped[TiposPicole] = saorm.relationship("TiposPicole", lazy="joined")
+    tipos_embalagem: Mapped[TiposEmbalagem] = saorm.relationship(
         "TiposEmbalagem", lazy="joined"
     )
-    conservantes_picoles: list[Conservantes] = saorm.relationship(
+    conservantes_picoles: Mapped[list[Conservantes]] = saorm.relationship(
         "Conservantes",
         secondary=rel_conservantes_picoles,
         backref=rel_conservantes_picoles,
         lazy="joined",
     )
-    aditivos_nutritivos_picole: list[AditivosNutritivos] = saorm.relationship(
+    aditivos_nutritivos_picole: Mapped[list[AditivosNutritivos]] = saorm.relationship(
         "AditivosNutritivos",
         secondary=rel_aditivos_nutritivos_picole,
         backref=rel_aditivos_nutritivos_picole,
         lazy="joined",
     )
-    ingredientes_picole: list[Ingrdientes] = saorm.relationship(
+    ingredientes_picole: Mapped[list[Ingrdientes]] = saorm.relationship(
         "Ingrdientes",
         secondary=rel_ingredientes_picole,
         backref=rel_ingredientes_picole,
