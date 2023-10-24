@@ -18,7 +18,7 @@ def insert_sabores(nome:str) -> None:
         ic(e)
         raise e
     else:
-        ic(sabor)
+        ic(sabor, sabor.id_)
         ic("Sabor inserido com sucesso")
 
 def mocked_insert_sabores(amount:int = 10) -> None:
@@ -26,5 +26,5 @@ def mocked_insert_sabores(amount:int = 10) -> None:
     mocker.add_provider(FoodProvider)
 
     for _ in range(amount):
-        name = mocker.fruit()
+        name = mocker.unique.fruit()
         insert_sabores(nome=name)
