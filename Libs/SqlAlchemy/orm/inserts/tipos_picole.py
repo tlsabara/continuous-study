@@ -5,25 +5,26 @@ from faker_food import FoodProvider
 from conf.db_session import create_session
 from models.tipos_picole import TiposPicole
 
-def insert_tipos_picole(nome: str) -> None:
+def insert_tipos_picole(nome: str) -> TiposPicole:
     ic("Inserindo tipos picole")
-    tp = TiposPicole(nome=nome)
+    tipo_picole_ = TiposPicole(nome=nome)
 
     try:
         with create_session() as session:
-            session.add(tp)
+            session.add(tipo_picole_)
             session.commit()
     except Exception as e:
         ic("Erro")
         raise e
     else:
-        ic(tp, tp.id_)
+        ic(tipo_picole_, tipo_picole_.id_)
         ic("Inserido tipo picole")
+        return tipo_picole_
 
 def mock_insert_tipos_picole(amount: int = 10) -> None:
-    fk = Faker()
+    fkr = Faker()
 
     for _ in range(amount):
-        nome = fk.unique.company()
+        nome = fkr.unique.company()
         insert_tipos_picole(nome=nome)
 

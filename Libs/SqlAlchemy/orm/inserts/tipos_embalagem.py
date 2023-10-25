@@ -1,32 +1,33 @@
 from icecream import ic
 from faker import Faker
-from faker_food import FoodProvider
 
 from conf.db_session import create_session
 from models.tipos_embalagem import TiposEmbalagem
 
 
-def insert_tipos_embalagem(nome:str) -> None:
+def insert_tipos_embalagem(nome:str) -> TiposEmbalagem:
     ic("Inserindo Tipos de Embalagem")
 
-    tc = TiposEmbalagem(nome=nome)
+    embalagem = TiposEmbalagem(nome=nome)
 
     try:
         with create_session() as session:
-            session.add(tc)
+            session.add(embalagem)
             session.commit()
     except Exception as e:
         ic("Erro ao inserir tipos embalagem")
         raise e
     else:
-        ic(tc, tc.id_)
+        ic(embalagem, embalagem.id_)
         ic("Novo Tipo embalagem insrido")
+        return embalagem
 
 def mock_insert_tipos_embalagem(amount:int = 10) -> None:
-    fk = Faker()
+    ic()
+    fkr = Faker()
 
     for _ in range(amount):
-        nome = fk.unique.color_name()
+        nome = fkr.unique.color_name()
         insert_tipos_embalagem(nome=nome)
 
 

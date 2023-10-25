@@ -12,7 +12,8 @@ class Conservantes(ModelBase):
         primary_key=True,
         autoincrement=True,
     )
-    nome: str = sa.Column(sa.String, nullable=False, unique=True)
+    nome: str = sa.Column(sa.String(45), nullable=False, unique=True)
+    descricao: str = sa.Column(sa.String(45), nullable=False, unique=False)
     data_criacao: datetime = sa.Column(
         sa.DateTime, default=datetime.now, nullable=False
     )

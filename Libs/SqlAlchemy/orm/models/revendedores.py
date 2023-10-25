@@ -17,4 +17,4 @@ class Revendedores(ModelBase):
     )
 
     def __repr__(self):
-        return f"<Revendedores: {self.nome}>"
+        return f"<Revendedores: {self.razao_social} - {self.cnpj}>"
