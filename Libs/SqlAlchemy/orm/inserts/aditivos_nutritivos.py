@@ -1,6 +1,9 @@
+from typing import Annotated
+
 from icecream import ic
 from faker import Faker
 from faker_food import FoodProvider
+from pydantic import validate_arguments, Field
 
 from conf.db_session import create_session
 from models.aditivos_nutritivos import AditivosNutritivos
@@ -29,12 +32,13 @@ def insert_adtivos_nutritivos(nome: str, formula_quimica: str) -> AditivosNutrit
         return adtivo
 
 
-def mock_insert_aditivos_nutritivos(amont: int = 10) -> None:
+@validate_arguments
+def mock_insert_aditivos_nutritivos(amount: Annotated[int, Field(ge=10, lt=1000)] = 10) -> None:
     ic()
     fkr = Faker(["pt_BR"])
     fkr.add_provider(FoodProvider)
 
-    for _ in range(amont):
+    for _ in range(amount):
         nome = fkr.unique.ingredient()
         formula_quimica = fkr.unique.ripe_id()
 
