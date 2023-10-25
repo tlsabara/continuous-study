@@ -1,6 +1,7 @@
 from icecream import ic
 from faker import Faker
-from faker_food import FoodProvider
+from typing import Annotated
+from pydantic import validate_arguments, Field
 
 from conf.db_session import create_session
 from models.tipos_picole import TiposPicole
@@ -21,7 +22,9 @@ def insert_tipos_picole(nome: str) -> TiposPicole:
         ic("Inserido tipo picole")
         return tipo_picole_
 
-def mock_insert_tipos_picole(amount: int = 10) -> None:
+
+@validate_arguments
+def mock_insert_tipos_picole(amount: Annotated[int, Field(ge=10, lt=1000)] = 10) -> None:
     fkr = Faker()
 
     for _ in range(amount):

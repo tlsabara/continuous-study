@@ -1,5 +1,7 @@
 from faker import Faker
 from icecream import ic
+from typing import Annotated
+from pydantic import validate_arguments, Field
 
 from models.revendedores import Revendedores
 from conf.db_session import create_session
@@ -27,7 +29,8 @@ def insert_revendedores(cnpj: int, razao_social: str, contato: str) -> Revendedo
         return revendedor
 
 
-def mock_insert_revendedores(amount: int = 10) -> None:
+@validate_arguments
+def mock_insert_revendedores(amount: Annotated[int, Field(ge=10, lt=1000)] = 10) -> None:
     ic()
     fkr = Faker(["pt_BR"])
 

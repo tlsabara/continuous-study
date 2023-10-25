@@ -1,5 +1,8 @@
 from icecream import ic
 from faker import Faker
+from typing import Annotated
+from pydantic import validate_arguments, Field
+
 
 from conf.db_session import create_session
 from models.tipos_embalagem import TiposEmbalagem
@@ -22,7 +25,9 @@ def insert_tipos_embalagem(nome:str) -> TiposEmbalagem:
         ic("Novo Tipo embalagem insrido")
         return embalagem
 
-def mock_insert_tipos_embalagem(amount:int = 10) -> None:
+
+@validate_arguments
+def mock_insert_tipos_embalagem(amount: Annotated[int, Field(ge=10, lt=1000)] = 10) -> None:
     ic()
     fkr = Faker()
 

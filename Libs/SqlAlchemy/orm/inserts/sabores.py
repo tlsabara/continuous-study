@@ -1,6 +1,8 @@
 from icecream import ic
 from faker import Faker
 from faker_food import FoodProvider
+from typing import Annotated
+from pydantic import validate_arguments, Field
 
 from conf.db_session import create_session
 from models.sabores import Sabores
@@ -22,7 +24,9 @@ def insert_sabores(nome:str) -> Sabores:
         ic("Sabor inserido com sucesso")
         return sabor
 
-def mock_insert_sabores(amount:int = 10) -> None:
+
+@validate_arguments
+def mock_insert_sabores(amount: Annotated[int, Field(ge=10, lt=1000)] = 10) -> None:
     ic()
     fkr = Faker(["pt_BR"])
     fkr.add_provider(FoodProvider)
