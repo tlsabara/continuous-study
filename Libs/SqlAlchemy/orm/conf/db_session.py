@@ -23,7 +23,6 @@ def create_engine() -> Engine:
     """Cria uma nova engine de conexão com o banco
 
     A função foi adaptada para conectar tando a db siglethread como multithread
-    :return:
     """
     global __engine
 
@@ -31,7 +30,7 @@ def create_engine() -> Engine:
         return
 
     db_url = os.environ.get("DATABASE_URL")
-    check_thread = os.environ.get("CHECK_THREAD", "").upper() == "true"
+    check_thread = os.environ.get("CHECK_THREAD", "").upper() == "TRUE"
     _args = {"check_same_thread": check_thread}
     __engine = sa.create_engine(url=db_url, echo=False, connect_args=_args)
 
@@ -56,7 +55,7 @@ def create_tables(drop_all: bool = False) -> None:
 
     if not __engine:
         create_engine()
-    if drop_all:
+    if drop_all and os.environ.get("STAGE") == "DEV":
         ModelBase.metadata.drop_all(__engine)
 
     ModelBase.metadata.create_all(__engine)
