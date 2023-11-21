@@ -15,21 +15,21 @@
       "id": 10310230121,
       "nome": "RabbitMQ OComkldeasd",
       "descricao": "RabbitMQ OComkldeasd",
-      "created_at": "2022-07-07T10:34:31.000Z",
+      "created_at": "2022-07-07T10:34:31.000Z"
     },
     "32103021030": {
       "status": "falha",
       "id": 32103021030,
       "nome": "not found",
       "descricao": "not found",
-      "created_at": "2022-07-07T10:34:31.000Z",
+      "created_at": "2022-07-07T10:34:31.000Z"
     },
     "12903218329": {
       "status": "falha",
       "id": 12903218329,
       "nome": "not found",
       "descricao": "not found",
-      "created_at": "2022-07-07T10:34:31.000Z",
+      "created_at": "2022-07-07T10:34:31.000Z"
     }
   }
 }
