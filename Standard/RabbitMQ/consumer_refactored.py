@@ -1,3 +1,5 @@
+from time import sleep
+
 import pika
 import json
 class RBMQConsumer:
@@ -37,6 +39,8 @@ class RBMQConsumer:
 
 def callback_check_json(ch, method, properties, body):
     try:
+        print("Processando.....")
+        sleep(2)
         json_body = json.loads(body.decode())
     except Exception as e:
         print(e)

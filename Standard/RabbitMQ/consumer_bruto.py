@@ -1,5 +1,6 @@
 import pika
 
+
 def callback_read(ch, method, properties, body):
     print(body)
 
