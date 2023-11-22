@@ -1,14 +1,14 @@
 from time import sleep
-
+import threading
 import pika
 import json
 class RBMQConsumer:
-    def __init__(self, callback_fn):
+    def __init__(self, callback_fn: callable = None, queue: str = None):
         self.__host = "localhost"
         self.__port = 5672
         self.__username = "admin"
         self.__password = "123123"
-        self.__queue = "queue_processa_consulta"
+        self.__queue = queue
         self.__callback_fn = callback_fn
         self.__connection = None
         self.channel = None
@@ -50,5 +50,5 @@ def callback_check_json(ch, method, properties, body):
 
 
 if __name__ == '__main__':
-    rbconsumer = RBMQConsumer(callback_check_json)
+    rbconsumer = RBMQConsumer(callback_check_json, queue="consumer_pedro")
     rbconsumer.consume()
