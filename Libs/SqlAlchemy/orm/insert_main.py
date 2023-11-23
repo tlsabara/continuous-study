@@ -7,6 +7,7 @@ from inserts.tipos_picole import mock_insert_tipos_picole
 from inserts.conservantes import mock_insert_conservates
 from inserts.ingrdientes import mock_insert_ingredientes
 from inserts.lotes import mock_insert_lotes
+from inserts.notas_fiscais import mock_insert_notas_fiscais
 
 
 if __name__ == "__main__":
@@ -19,4 +20,4 @@ if __name__ == "__main__":
     mock_insert_conservates()
     mock_insert_revendedores()
     mock_insert_lotes()
-
+    mock_insert_notas_fiscais()

@@ -27,7 +27,9 @@ class NotasFiscais(ModelBase):
     valor: float = sa.Column(sa.DECIMAL(8, 2), nullable=False)
     numero_serie: int = sa.Column(sa.Integer, nullable=False, unique=False)
     descricao: str = sa.Column(sa.String(200), nullable=False)
-    data_criacao: str = sa.Column(sa.DateTime, default=datetime.now, nullable=False)
+    data_criacao: datetime = sa.Column(
+        sa.DateTime, default=datetime.now, nullable=False
+    )
     id_revendedor: str = sa.Column(
         sa.BigInteger, sa.ForeignKey("revendedores.id_"), nullable=False
     )
