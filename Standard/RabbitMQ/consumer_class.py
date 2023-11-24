@@ -1,3 +1,4 @@
+import argparse
 from time import sleep
 import threading
 import pika
@@ -50,5 +51,10 @@ def callback_check_json(ch, method, properties, body):
 
 
 if __name__ == '__main__':
-    rbconsumer = RBMQConsumer(callback_check_json, queue="consumer_pedro")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--queue", type=str, default="consumer_thiago")
+
+    parsed_args = parser.parse_args()
+
+    rbconsumer = RBMQConsumer(callback_check_json, queue=parsed_args.queue)
     rbconsumer.consume()

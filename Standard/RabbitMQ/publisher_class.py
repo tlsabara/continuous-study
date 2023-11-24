@@ -57,7 +57,9 @@ if __name__ == '__main__':
                 }
                 rbpublisher.publish(message, routing_key)
         print("->>", i)
-        sleep(1)
+        if i % 5 == 0 and i != 0:
+            sleep(3)
+
         message = {
             "key": "teste_publish_"+routing_key,
             "iteration": i
