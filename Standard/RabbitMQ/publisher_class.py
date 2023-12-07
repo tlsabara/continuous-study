@@ -16,7 +16,7 @@ class RBMQPublisher:
 
         self.create_channel()
 
-    def create_channel(self):
+    def create_channel(self) -> object:
         self.__connection = pika.BlockingConnection(
             pika.ConnectionParameters(
                 host=self.__host,
